@@ -17,15 +17,28 @@
     <div id="app">
       <div class="header">
         <h1>QUIZ GAMES</h1>
-        <div class="vidas icon-list">
-          <div class="vazios">
-            <i class="nes-icon margem is-medium heart is-empty"></i>
-            <i class="nes-icon margem is-medium heart is-empty"></i>
-            <i class="nes-icon margem is-medium heart is-empty"></i>
+        <div class="info">
+          <div class="vidas icon-list">
+            <div class="vazios">
+              <i class="nes-icon margem is-medium heart is-empty"></i>
+              <i class="nes-icon margem is-medium heart is-empty"></i>
+              <i class="nes-icon margem is-medium heart is-empty"></i>
+            </div>
+            <div class="cheios">
+              <i v-for="vida in vidas" class="nes-icon is-medium heart"></i>
+            </div>
           </div>
-          <div class="cheios">
-            <i v-for="vida in vidas" class="nes-icon is-medium heart"></i>
+          <div class="textos">
+            <span>TEMPO: {{tempo}}s</span>
+            <span>NIVEL: {{indices.length}}/{{perguntas.length}}</span>
           </div>
+        </div>
+        <div class="progresso">
+          <progress
+            class="nes-progress is-success"
+            :value="nivel"
+            max="100"
+          ></progress>
         </div>
       </div>
       <div v-show="vidas > 0" class="quiz">
@@ -72,7 +85,7 @@
             @click="enviarResposta()"
             type="button"
             class="nes-btn is-success"
-            v-show="indiceResposta > 0"
+            v-show="indiceResposta > 0, tempo > 0"
           >
             RESPONDER >
           </button>
@@ -80,6 +93,8 @@
       </div>
       <div v-show="vidas === 0" class="game-over">
         <h1 class="nes-text is-error">VOCÊ PERDEU!</h1>
+        <p>Seu nível: {{indices.length}}</p>
+        <p>seu recorde: {{recorde}} respostas corretas</p>
         <button v-on:click="jogarNovamente()" class="nes-btn is-primary">
           JOGAR NOVAMENTE
         </button>

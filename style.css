@@ -24,6 +24,15 @@
   flex-direction: column;
 }
 
+.header .info {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+}
+.progresso {
+  width: 100%;
+  padding: 10px;
+}
 .game-over {
   display: flex;
   flex-direction: column;
